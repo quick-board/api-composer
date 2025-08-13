@@ -1,0 +1,10 @@
+server:
+  port: 8100 # dev, prod; rsc, func, etc; type; num;
+
+eureka:
+  client:
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://admin:3489@localhost:8210/eureka/
