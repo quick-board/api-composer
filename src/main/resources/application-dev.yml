@@ -8,3 +8,14 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://admin:3489@localhost:8210/eureka/
+
+
+services:
+  post:
+    url: http://resource-post
+  board:
+    url: http://resource-board
+  comment:
+    url: http://resouce-comment
+  profile:
+    url: http://resource-profile

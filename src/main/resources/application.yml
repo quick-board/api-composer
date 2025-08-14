@@ -1,3 +1,7 @@
 spring:
   application:
     name: api-composer
+
+springdoc:
+  swagger-ui:
+    path: /swagger
