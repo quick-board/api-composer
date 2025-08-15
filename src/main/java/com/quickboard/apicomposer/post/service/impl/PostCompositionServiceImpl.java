@@ -1,5 +1,6 @@
 package com.quickboard.apicomposer.post.service.impl;
 
+import com.quickboard.apicomposer.common.dto.PageRequest;
 import com.quickboard.apicomposer.common.enums.Direction;
 import com.quickboard.apicomposer.common.dto.PagedResponse;
 import com.quickboard.apicomposer.common.feign.PostClient;
@@ -27,7 +28,7 @@ public class PostCompositionServiceImpl implements PostCompositionService {
 
     @Override
     public PagedResponse<PostCompositeResponse> getPostAndProfile(Long boardId, PostSearchCondition postSearchCondition, Long size, String sort, Direction direction) {
-        PagedResponse<PostComposableResponse> pagedPosts = postClient.getAllPosts(boardId, postSearchCondition, size, sort, direction);
+        PagedResponse<PostComposableResponse> pagedPosts = postClient.getAllPosts(boardId, postSearchCondition, new PageRequest(size, sort, direction));
         List<PostComposableResponse> posts = pagedPosts.content();
         List<Long> distinctProfiles = posts.stream().map(PostComposableResponse::profileId).distinct().toList();
         Map<Long, ProfileComposableResponse> profilesMap = profileClient.getProfilesByIds(new ProfileBulkRequest(distinctProfiles)).stream()

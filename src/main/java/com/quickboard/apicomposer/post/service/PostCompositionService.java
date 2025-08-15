@@ -1,7 +1,7 @@
 package com.quickboard.apicomposer.post.service;
 
-import com.quickboard.apicomposer.common.enums.Direction;
 import com.quickboard.apicomposer.common.dto.PagedResponse;
+import com.quickboard.apicomposer.common.enums.Direction;
 import com.quickboard.apicomposer.post.dto.PostCompositeResponse;
 import com.quickboard.apicomposer.post.dto.PostSearchCondition;
 

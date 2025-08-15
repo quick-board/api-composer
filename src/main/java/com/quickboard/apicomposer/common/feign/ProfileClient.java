@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@FeignClient(name = "profileClient", url = "http://resource-profile")
+@FeignClient(name = "resource-profile")
 public interface ProfileClient {
 
     @GetMapping("/rsc/v1/profiles/{id}")

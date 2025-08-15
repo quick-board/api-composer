@@ -21,7 +21,7 @@ public class PostController {
                                                                   @ParameterObject @ModelAttribute PostSearchCondition postSearchCondition,
                                                                   @RequestParam(value = "size", required = false) Long size,
                                                                   @RequestParam(value = "sort", required = false) String sort,
-                                                                  @RequestParam(value = "direction", required = false)Direction direction){
+                                                                  @RequestParam(value = "direction", required = false) Direction direction){
 
         return postCompositionService.getPostAndProfile(boardId, postSearchCondition, size, sort, direction);
     }
