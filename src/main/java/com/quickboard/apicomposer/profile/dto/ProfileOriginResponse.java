@@ -5,7 +5,7 @@ import com.quickboard.apicomposer.profile.enums.Gender;
 import java.time.Instant;
 import java.time.LocalDate;
 
-public record ProfileComposableResponse(
+public record ProfileOriginResponse(
         Long id,
         String nickname,
         String firstName,
