@@ -2,7 +2,7 @@ package com.quickboard.apicomposer.comment.dto;
 
 import com.quickboard.apicomposer.comment.enums.CommentStatus;
 
-public record CommentResponse(
+public record CommentOriginResponse(
         Long id,
         String content,
         Long likes,

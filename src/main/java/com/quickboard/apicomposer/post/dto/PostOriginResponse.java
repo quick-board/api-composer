@@ -2,7 +2,7 @@ package com.quickboard.apicomposer.post.dto;
 
 import java.time.Instant;
 
-public record PostComposableResponse(
+public record PostOriginResponse(
         Long id,
         String title,
         String content,

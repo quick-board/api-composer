@@ -6,5 +6,6 @@ import com.quickboard.apicomposer.post.dto.PostCompositeResponse;
 import com.quickboard.apicomposer.post.dto.PostSearchCondition;
 
 public interface PostCompositionService {
-    PagedResponse<PostCompositeResponse> getPostAndProfile(Long boardId, PostSearchCondition postSearchCondition, Long size, String sort, Direction direction);
+    PagedResponse<PostCompositeResponse> getPostsAndProfiles(Long boardId, PostSearchCondition postSearchCondition, Long size, String sort, Direction direction);
+    PostCompositeResponse getPostAndProfile(Long postId);
 }

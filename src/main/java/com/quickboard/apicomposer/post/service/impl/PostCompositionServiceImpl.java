@@ -5,12 +5,12 @@ import com.quickboard.apicomposer.common.enums.Direction;
 import com.quickboard.apicomposer.common.dto.PagedResponse;
 import com.quickboard.apicomposer.common.feign.PostClient;
 import com.quickboard.apicomposer.common.feign.ProfileClient;
-import com.quickboard.apicomposer.post.dto.PostComposableResponse;
+import com.quickboard.apicomposer.post.dto.PostOriginResponse;
 import com.quickboard.apicomposer.post.dto.PostCompositeResponse;
 import com.quickboard.apicomposer.post.dto.PostSearchCondition;
 import com.quickboard.apicomposer.post.service.PostCompositionService;
 import com.quickboard.apicomposer.profile.dto.ProfileBulkRequest;
-import com.quickboard.apicomposer.profile.dto.ProfileComposableResponse;
+import com.quickboard.apicomposer.profile.dto.ProfileOriginResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -27,13 +27,13 @@ public class PostCompositionServiceImpl implements PostCompositionService {
     private final ProfileClient profileClient;
 
     @Override
-    public PagedResponse<PostCompositeResponse> getPostAndProfile(Long boardId, PostSearchCondition postSearchCondition, Long size, String sort, Direction direction) {
-        PagedResponse<PostComposableResponse> pagedPosts = postClient.getAllPosts(boardId, postSearchCondition, new PageRequest(size, sort, direction));
-        List<PostComposableResponse> posts = pagedPosts.content();
-        List<Long> distinctProfiles = posts.stream().map(PostComposableResponse::profileId).distinct().toList();
-        Map<Long, ProfileComposableResponse> profilesMap = profileClient.getProfilesByIds(new ProfileBulkRequest(distinctProfiles)).stream()
+    public PagedResponse<PostCompositeResponse> getPostsAndProfiles(Long boardId, PostSearchCondition postSearchCondition, Long size, String sort, Direction direction) {
+        PagedResponse<PostOriginResponse> pagedPosts = postClient.getAllPosts(boardId, postSearchCondition, new PageRequest(size, sort, direction));
+        List<PostOriginResponse> posts = pagedPosts.content();
+        List<Long> distinctProfiles = posts.stream().map(PostOriginResponse::profileId).distinct().toList();
+        Map<Long, ProfileOriginResponse> profilesMap = profileClient.getProfilesByIds(new ProfileBulkRequest(distinctProfiles)).stream()
                 .collect(Collectors.toMap(
-                        ProfileComposableResponse::id,
+                        ProfileOriginResponse::id,
                         Function.identity(),
                         (existing, replacement) -> existing
                 ));
@@ -42,5 +42,12 @@ public class PostCompositionServiceImpl implements PostCompositionService {
         ).toList();
 
         return new PagedResponse<>(compositePosts, pagedPosts.page());
+    }
+
+    @Override
+    public PostCompositeResponse getPostAndProfile(Long postId) {
+        PostOriginResponse post = postClient.getPostById(postId);
+        ProfileOriginResponse profile = profileClient.getProfile(post.profileId());
+        return PostCompositeResponse.compose(post, profile);
     }
 }

@@ -17,14 +17,17 @@ public class PostController {
     private final PostCompositionService postCompositionService;
 
     @GetMapping("/boards/{id}/posts")
-    public PagedResponse<PostCompositeResponse> getPostsByBoardId(@PathVariable("id") Long boardId,
+    public PagedResponse<PostCompositeResponse> getAllPostsByBoardId(@PathVariable("id") Long boardId,
                                                                   @ParameterObject @ModelAttribute PostSearchCondition postSearchCondition,
                                                                   @RequestParam(value = "size", required = false) Long size,
                                                                   @RequestParam(value = "sort", required = false) String sort,
                                                                   @RequestParam(value = "direction", required = false) Direction direction){
 
-        return postCompositionService.getPostAndProfile(boardId, postSearchCondition, size, sort, direction);
+        return postCompositionService.getPostsAndProfiles(boardId, postSearchCondition, size, sort, direction);
     }
 
-
+    @GetMapping("/boards/{boardId}/posts/{postId}")
+    public PostCompositeResponse getPostById(@PathVariable("postId") Long postId){
+        return postCompositionService.getPostAndProfile(postId);
+    }
 }
