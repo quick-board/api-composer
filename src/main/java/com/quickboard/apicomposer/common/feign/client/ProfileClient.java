@@ -1,5 +1,6 @@
-package com.quickboard.apicomposer.common.feign;
+package com.quickboard.apicomposer.common.feign.client;
 
+import com.quickboard.apicomposer.common.feign.FeignConfig;
 import com.quickboard.apicomposer.profile.dto.ProfileBulkRequest;
 import com.quickboard.apicomposer.profile.dto.ProfileOriginResponse;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@FeignClient(name = "resource-profile")
+@FeignClient(name = "resource-profile", configuration = FeignConfig.class)
 public interface ProfileClient {
 
     @GetMapping("/rsc/v1/profiles/{id}")
