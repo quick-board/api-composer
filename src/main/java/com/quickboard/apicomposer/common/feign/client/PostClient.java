@@ -1,6 +1,5 @@
 package com.quickboard.apicomposer.common.feign.client;
 
-import com.quickboard.apicomposer.common.dto.PageRequest;
 import com.quickboard.apicomposer.common.dto.PagedResponse;
 import com.quickboard.apicomposer.common.feign.FeignConfig;
 import com.quickboard.apicomposer.post.dto.PostOriginResponse;
@@ -13,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public interface PostClient {
     @GetMapping("/rsc/v1/boards/{id}/posts")
     PagedResponse<PostOriginResponse> getAllPosts(@PathVariable("id") Long boardId,
-                                                  @SpringQueryMap PostSearchCondition postSearchCondition,
-                                                  @SpringQueryMap PageRequest pageRequest);
+                                                  @SpringQueryMap PostSearchCondition postSearchCondition);
 
     @GetMapping("/rsc/v1/posts/{id}")
     PostOriginResponse getPostById(@PathVariable("id") Long postId);

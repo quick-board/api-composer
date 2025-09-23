@@ -2,6 +2,7 @@ package com.quickboard.apicomposer.common.feign.client;
 
 import com.quickboard.apicomposer.common.feign.FeignConfig;
 import com.quickboard.apicomposer.profile.dto.ProfileBulkRequest;
+import com.quickboard.apicomposer.profile.dto.ProfileCreate;
 import com.quickboard.apicomposer.profile.dto.ProfileOriginResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -20,4 +21,7 @@ public interface ProfileClient {
 
     @PostMapping("/rsc/v1/profiles/bulk")
     List<ProfileOriginResponse> getProfilesByIds(@RequestBody ProfileBulkRequest profileBulkRequest);
+
+    @PostMapping("/rsc/v1/profiles/inner")
+    void postProfileInner(@RequestHeader("x-account-id") Long accountId, @RequestBody ProfileCreate profileCreate);
 }

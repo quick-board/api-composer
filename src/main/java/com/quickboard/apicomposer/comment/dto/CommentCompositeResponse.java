@@ -25,4 +25,8 @@ public record CommentCompositeResponse(
                 comment.status()
         );
     }
+
+    public static CommentCompositeResponse from(CommentOriginResponse comment){
+        return compose(comment, null);
+    }
 }
