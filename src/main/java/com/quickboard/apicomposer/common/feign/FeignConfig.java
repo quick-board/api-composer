@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 public class FeignConfig {
     @Bean
     public RequestInterceptor headerPropagationInterceptor(){
-        log.info("headerPropagationInterceptor 나 태어났어");
         return new HeaderPropagationInterceptor();
     }
 }

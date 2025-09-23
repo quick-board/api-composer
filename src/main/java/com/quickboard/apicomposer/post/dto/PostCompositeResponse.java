@@ -29,4 +29,8 @@ public record PostCompositeResponse(
                 post.updatedAt()
         );
     }
+
+    public static PostCompositeResponse from(PostOriginResponse post){
+        return compose(post, null);
+    }
 }

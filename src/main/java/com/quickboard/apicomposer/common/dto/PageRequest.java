@@ -1,7 +1,5 @@
 package com.quickboard.apicomposer.common.dto;
 
-
-import com.quickboard.apicomposer.common.enums.Direction;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PageRequest {
     private Long size;
+    private Long page;
     private String sort;
-    private Direction direction;
 }
